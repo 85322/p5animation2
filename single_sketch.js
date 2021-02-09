@@ -14,14 +14,14 @@ let circle = {
   diameter: 30
 };
 
-let myFont;
-
 function preload(){
   ExoBlack = loadFont('assets/Exo-Black.otf');
 }
 
 let x = 0;
-let speed = 3;
+let y = 0;
+let speedX = 3;
+let speedY = 3;
 
 function setup (){
   createCanvas (600, 400, WEBGL);
@@ -39,17 +39,23 @@ function draw(){
   stroke(50);
   fill( 255, 150, 0 )
   ellipse( 150, 100, 50, 25 );
-  line( -150, 150, 100, 0 );
-  rect( x, 120, 50, 50 );
+  //line( -150, 150, 100, 0 );
+
+  rect( x, y, 50, 50 );
 
   if (x > 250) {
-    speed = -3;
+    speedX = -3;
   } else if (x < -300) {
-    speed = +3;
+    speedX = random(1, 3);
   }
 
-  x = x + speed;
-
+  if (y > 150) {
+    speedY = -3;
+  } else if (y < -200) {
+    speedY = random(1, 3);
+  }
+  x = x + speedX;
+  y = y + speedY;
 
   text("PosX: " + mouseX + "  PosY: "+ mouseY, -300, -185);
   fill (colors.red, colors.green, colors.blue);
