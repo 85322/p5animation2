@@ -1,3 +1,5 @@
+'use strict';
+
 var moveRectX = 100;
 let posX = -200;
 let posY = -190;
@@ -15,7 +17,10 @@ let circle = {
 };
 
 function preload(){
-  ExoBlack = loadFont('assets/Exo-Black.otf');
+  //braucht man anscheinend nicht und geht
+  //gleich in setupt mit
+  //let ExoBlack = loadFont('assets/Exo-Black.otf');
+  // ??
 }
 
 let x = 0;
@@ -25,9 +30,29 @@ let speedY = 3;
 
 let on = true;
 
+
+//this. geht trotz strict mode nicht richtig
+//und ruft window. auf
+let bubble = {
+  x: 130,
+  y: 175,
+  display: () => { 
+    stroke(255);
+    strokeWeight(4);
+    noFill();
+    ellipse( bubble.x, bubble.y, 24, 25);
+  },
+  move: function()  {
+    this.x = this.x + random(-1, 1);
+    this.y = this.y + random(-1, 1);
+    console.log(this);
+  }
+}
+
 function setup (){
   createCanvas (600, 400, WEBGL);
   textSize(20);
+  let ExoBlack = loadFont('assets/Exo-Black.otf');
   textFont(ExoBlack);
 }
 
@@ -37,7 +62,8 @@ function draw(){
   let g = map(mouseY, 0, 400, 0, 255);
   
 
-  
+ 
+
   background(r, g, b);
   strokeWeight(3);
   stroke(50);
@@ -95,7 +121,10 @@ function draw(){
     
    }
    
- 
+   bubble.display();
+   bubble.move();
+
+
   rotateX(frameCount * 0.005);
   rotateY(frameCount * 0.005);
   noFill();
@@ -121,4 +150,6 @@ function draw(){
 
   drawBall(-200, 0, 30, 30, 0);
   drawBall(-150, 50, 5, 15, 150);
+
+  
 }
