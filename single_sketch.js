@@ -23,6 +23,8 @@ let y = 0;
 let speedX = 3;
 let speedY = 3;
 
+let on = true;
+
 function setup (){
   createCanvas (600, 400, WEBGL);
   textSize(20);
@@ -33,6 +35,8 @@ function draw(){
   let b = 255;
   let r = map(mouseX, 0, 600, 0, 255);
   let g = map(mouseY, 0, 400, 0, 255);
+  
+
   
   background(r, g, b);
   strokeWeight(3);
@@ -100,5 +104,21 @@ function draw(){
   fill(255, 100, 10)
   rect(45, 40, 50, 50);
 
-  
+  if (mouseIsPressed) {
+    background(255, 0 ,0);
+  }
+
+  if (on) {
+    rect(100, 100, 25, 25);
+  } else {
+    background(0);
+  }
+
+  const drawBall = (x, y, h, w, b) => {
+    rect(x, y, h, w);
+    fill(255, 255, b);
+  }
+
+  drawBall(-200, 0, 30, 30, 0);
+  drawBall(-150, 50, 5, 15, 150);
 }
